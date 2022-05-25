@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>video Demo</title>
+    <!-- <script type = "text/javascript" src="video.js"></script> -->
+    <script type = "text/javascript"> 
+            async function msgprint() { 
+                if (navigator.mediaDevices === undefined) {
+                    console.log("undefined undefined");
+                   // navigator.mediaDevices = {};
+                      navigator.mediaDevices = {};
+                    } 
+
+                    if (navigator.mediaDevices.getUserMedia === undefined) {
+                        console.log("undefined undefined");
+                        navigator.mediaDevices.getUserMedia = function(constraints) {
+
+                            // First get ahold of the legacy getUserMedia, if present
+                            var getUserMedia = navigator.webkitGetUserMedia || 
+                            navigator.mozGetUserMedia ||
+                            navigator.mozGetUserMedia    ||
+                            navigator.msGetUserMedia;
+
+                            // Some browsers just don't implement it - return a rejected promise with an error
+                            // to keep a consistent interface
+                            if (!getUserMedia) {
+                            return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+                            }
+
+                            // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+                            return new Promise(function(resolve, reject) {
+                            getUserMedia.call(navigator, constraints, resolve, reject);
+                            });
+                        }
+                        }
+
+                    const localVideoComponent = document.getElementById('video')
+                    let stream
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({video: true,audio: true}) 
+                        } catch (error) {
+                            console.log(error)
+                        }
+                        localVideoComponent.srcObject = stream
+                }
+    </script>
+</head>
+<body>
+
+    <video autoplay muted controls id="video" width="480" height="320"></video>
+    <br>
+    <br>
+    <button id="btnStartStopCam" onclick="msgprint();">Start Camera</button>
+    <br>
+    <br>
+    <button id="btnPauseReco" onclick="msgprint();">Pause</button>
+</body>
+</html>

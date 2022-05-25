@@ -5,3 +5,10 @@
  - git remote add origin https://github.com/chtnbarod/myNode.git
  - git remote set-url origin https://github.com/chtnbarod/myNode.git
 
+
+ **socket**
+
+- create connection on socket.io
+- Create Room
+- joinRoom Room
+
