@@ -17,9 +17,16 @@ router.get('/',function(req,res){
 
   });
 
-router.post('/test', (req, res) => {
+
+// API router
+router.get('/get-api', async (req, res) => {
+    res.send(req.body.name);
+});
+
+router.post('/test', async (req, res) => {
   res.send(`${JSON.stringify(req.body)}`);
 });
+
 
 const port = process.env.port || 3001;
 app.listen(port);
