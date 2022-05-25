@@ -6,6 +6,12 @@
 //     database : "myTest"
 // })
 
+// git init
+// git commit -m "first commit"
+// git remote add origin https://github.com/chtnbarod/myNode.git
+// git remote set-url origin https://github.com/chtnbarod/myNode.git
+
+
 // // Connecting to database
 // connection.connect(function(err) {
 //     if(err){
@@ -59,6 +65,8 @@ console.log(`Running at  http://localhost:${port}`);
 
 const fs = require('fs');
 
+
+
 function test_fun(mJson) {
 
     //fs.mkdirSync("mtest")
@@ -78,7 +86,7 @@ function test_fun(mJson) {
       }
 
 
-     // return `Not 2 ${mJson}`;
+     // return `Not 2 ${mJson}`;  
 
       fs.readFileSync("./km.txt", "utf-8" , (err, data) => {
         return data;
