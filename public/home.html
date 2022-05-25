@@ -5,11 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
+
 </head>
 <body>
     
 
     hello , hi fgfg
+
+    <button onclick="makeGetRequest()"> ok</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        function makeGetRequest() {
+
+            // axios({
+            //     method: 'post',
+            //     url: "http://localhost:3001/test",
+            //     headers: {}, 
+            //     data: {
+            //         "tg" : 'bar',
+            //      },
+                 
+            //     });
+
+            axios.post("http://localhost:3001/test" , { "tt" : "test" }).then(response => {
+                console.log(response.data);
+            });
+            // axios.post("http://localhost:3001/test").then(
+                
+            //     (response) => {
+            //         var result = response.data;
+            //         console.log(result);
+            //     },
+            //     (error) => {
+            //         console.log(error);
+            //     }
+            // );
+        }
+
+    </script>
 
 </body>
 </html>

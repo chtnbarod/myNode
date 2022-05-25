@@ -27,6 +27,7 @@
 
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const router = express.Router();
 const port = process.env.port || 3001;
 
@@ -34,44 +35,55 @@ const port = process.env.port || 3001;
 
 // view router
 app.use('/', router);
-app.use('/ab', router);
+
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 router.get('/',function(req,res){
     res.sendFile("public/home.html" , { root : __dirname });
 
   });
 
-router.post("/ab" ,test_fun);
+app.post('/test', (req, res) => {
+  const book = req.body;
+  console.log(`abc ${JSON.stringify(book)}`);
+  res.send(`test calling ${test_fun(JSON.stringify(book))}`);
+});
 
 app.listen(port);
 console.log(`Running at  http://localhost:${port}`);
 
+'use strict';
 
-function test_fun(){
-    console.log("runing");
-    return "Hello 481";
-}
+const fs = require('fs');
 
-// const fs = require('fs');
-// function test_fun(mJson) {
+function test_fun(mJson) {
 
-//     fs.mkdirSync("mtest")
+    //fs.mkdirSync("mtest")
 
-//     var jsonObj = JSON.parse(mJson);
+    var jsonObj = JSON.parse(mJson);
 
-//     // stringify JSON Object
-//     var jsonContent = JSON.stringify(jsonObj);
-//     console.log(jsonContent);
+    // stringify JSON Object
+    var jsonContent = JSON.stringify(jsonObj);
+    console.log(jsonContent);
 
-//     try {
-//         fs.writeFileSync("mtest/myJson.json" , jsonContent)
-//         fs.close
-//         console.log("File written successfully");
-//       } catch(err) {
-//         console.error(err + " error");
-//       }
+    try {
+        fs.writeFileSync("myJson.json" , jsonContent)
+        fs.close
+        console.log("File written successfully");
+      } catch(err) {
+        console.log(err + " error");
+      }
 
-//  }
 
- // test_fun('{"persons":[{"name":"John","city":"New York"},{"name":"Phil","city":"Ohio"}]}');
-  
+     // return `Not 2 ${mJson}`;
+
+      fs.readFileSync("./km.txt", "utf-8" , (err, data) => {
+        return data;
+      });
+
+      return `Not 2 ${mJson}`;
+
+ }  
