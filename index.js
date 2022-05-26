@@ -1,8 +1,7 @@
-const app = require('./app-router')
+const http = require("./app-router")
 
-
-const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+// socket
+const io = require('socket.io')(http)
 
 
 io.on('connection', (socket) => {
@@ -55,3 +54,8 @@ io.on('connection', (socket) => {
       socket.broadcast.to(event.roomId).emit('webrtc_ice_candidate', event)
     })
   })
+
+
+
+
+
