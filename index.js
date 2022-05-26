@@ -1,4 +1,4 @@
-const http = require("./app-router")
+const http = require("./router")
 
 // socket
 const io = require('socket.io')(http)
